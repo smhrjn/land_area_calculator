@@ -1,139 +1,158 @@
 MainLayout:
 
 <MainLayout>:
-    canvas.before:
-        Color:
-            rgba: 0.4, 0.3, 0.2, 1
-        Rectangle:
-            size: self.size
     orientation: 'vertical'
     color: 0.4, 0.4, 1, 0.8
-    BoxLayout:
-        orientation: 'vertical'
-        size_hint: 1, None
-        height: dp(130)
-        Label:
-            text: "Land Area Calculator"
-            font_size: 50
-            color: 0.1, 1, 0
-        Label:
-            text: "(Triangulation Method)"
-            font_size: 20
-            color: 0.1, 1, 0
-        Label:
-            id: total_area
-            font_size: 50
-            color: 0.8, 0.8, 0.1
-            text: "Total Area: 0"
-    BoxLayout:
-        orientation: 'vertical'
-        size_hint: 1, None
-        height: dp(120)
-        id: adder
+    StackLayout:
+        id: main_app
+        canvas.before:
+            Color:
+                rgba: 0.4, 0.3, 0.2, 1
+            Rectangle:
+                size: self.size
         BoxLayout:
+            orientation: 'vertical'
             size_hint: 1, None
-            height: dp(20)
+            height: dp(130)
             Label:
-                text: "A (ft)"
+                text: "Land Area Calculator"
+                font_size: dp(20)
+                color: 0.1, 1, 0
             Label:
-                text: "A (in)"
+                text: "(Triangulation Method)"
+                font_size: dp(15)
             Label:
-                text: "B (ft)"
+                font_size: dp(20)
+                color: 0.1, 0.8, 0.1
+                text: "Total Area"
             Label:
-                text: "B (in)"
+                id: total_area
+                font_size: dp(20)
+                color: 0.8, 0.8, 0.1
+                text: "0.00 sq.ft."
             Label:
-                text: "C (ft)"
+                id: total_area_sqm
+                font_size: dp(20)
+                color: 0.8, 0.8, 0.1
+                text: "0.00 sq.m."
             Label:
-                text: "C (in)"
-            Label:
+                id: total_area_RAPD
+                font_size: dp(20)
+                color: 0.8, 0.8, 0.1
+                text: "0-0-0-0 (RAPD)"
         BoxLayout:
+            orientation: 'vertical'
             size_hint: 1, None
-            height: dp(40)
-            FloatInput:
-                id: a1
-                background_color: "d0c5eb" if self.focus else "c5ebd7"
-            FloatInput:
-                id: a2
-                background_color: "d0c5eb" if self.focus else "aaaa62"
-            FloatInput:
-                id: b1
-                background_color: "d0c5eb" if self.focus else "c5ebd7"
-            FloatInput:
-                id: b2
-                background_color: "d0c5eb" if self.focus else "aaaa62"
-            FloatInput:
-                id: c1
-                background_color: "d0c5eb" if self.focus else "c5ebd7"
-            FloatInput:
-                id: c2
-                background_color: "d0c5eb" if self.focus else "aaaa62"
-            Button:
-                id: add_button
-                text: "Add"
-                background_color: "#23e30e"
-                color: "#f5f114"
-                on_press: root.add_area()
-        RelativeLayout:
-            canvas.before:
-                Color:
-                    rgba: 0.4, 0.3, 0.8, 1
-                Rectangle:
-                    size: self.size
-            size_hint: 1, None
-            height: dp(5)
-            color: 1, 1, 0, 1
-        BoxLayout:
-            size_hint: 1, None
-            height: dp(25)
-            orientation: 'horizontal'
-            Label:
-                text: "Click on S. No. to edit the Area."
-                id: message
-                color: (0, 1, 0, 1)
-                size_hint: 0.7, 1
-            Button:
-                id: cancel
-                text: "Cancel Update"
-                on_press: root.cancel()
-                size_hint: 0.3, 1
-                disabled: True
-                color: "#aabbee"
-                background_color: (0, 1, 0, 0.3)
-        RelativeLayout:
-            canvas.before:
-                Color:
-                    rgba: 0.4, 0.3, 0.8, 1
-                Rectangle:
-                    size: self.size
-            size_hint: 1, None
-            height: dp(5)
-            color: 1, 1, 0, 1
-        RelativeLayout:
-            canvas.before:
-                Color:
-                    rgba: 0.4, 0.5, 0.2, 1
-                Rectangle:
-                    size: self.size
-            orientation: 'horizontal'
-            size_hint: 1, None
-            height: dp(20)
+            height: dp(120)
+            id: adder
             BoxLayout:
+                size_hint: 1, None
+                height: dp(20)
                 Label:
-                    text: "S. No."
+                    text: "A (ft)"
                 Label:
-                    text: "A"
+                    text: "A (in)"
                 Label:
-                    text: "B"
+                    text: "B (ft)"
                 Label:
-                    text: "C"
+                    text: "B (in)"
                 Label:
-                    text: "Area"
+                    text: "C (ft)"
                 Label:
-                    text: "---"
+                    text: "C (in)"
+                Label:
+                # Button:
+                #     text: 'save image'
+                #     on_release: root.export()
+                #     background_color: (0, 1, 0, 0.3)
+            BoxLayout:
+                size_hint: 1, None
+                height: dp(40)
+                FloatInput:
+                    id: a1
+                    background_color: "d0c5eb" if self.focus else "c5ebd7"
+                FloatInput:
+                    id: a2
+                    background_color: "d0c5eb" if self.focus else "aaaa62"
+                FloatInput:
+                    id: b1
+                    background_color: "d0c5eb" if self.focus else "c5ebd7"
+                FloatInput:
+                    id: b2
+                    background_color: "d0c5eb" if self.focus else "aaaa62"
+                FloatInput:
+                    id: c1
+                    background_color: "d0c5eb" if self.focus else "c5ebd7"
+                FloatInput:
+                    id: c2
+                    background_color: "d0c5eb" if self.focus else "aaaa62"
+                Button:
+                    id: add_button
+                    text: "Add"
+                    background_color: "#23e30e"
+                    color: "#f5f114"
+                    on_press: root.add_area()
+            RelativeLayout:
+                canvas.before:
+                    Color:
+                        rgba: 0.4, 0.3, 0.8, 1
+                    Rectangle:
+                        size: self.size
+                size_hint: 1, None
+                height: dp(5)
+                color: 1, 1, 0, 1
+            BoxLayout:
+                size_hint: 1, None
+                height: dp(25)
+                orientation: 'horizontal'
+                Label:
+                    text: "Click on S. No. to edit the Area."
+                    id: message
+                    color: (0, 1, 0, 1)
+                    size_hint: 0.7, 1
+                Button:
+                    id: cancel
+                    text: "Cancel Update"
+                    on_press: root.cancel()
+                    size_hint: 0.3, 1
+                    disabled: True
+                    color: "#aabbee"
+                    background_color: (0, 1, 0, 0.3)
+            RelativeLayout:
+                canvas.before:
+                    Color:
+                        rgba: 0.4, 0.3, 0.8, 1
+                    Rectangle:
+                        size: self.size
+                size_hint: 1, None
+                height: dp(5)
+                color: 1, 1, 0, 1
+            RelativeLayout:
+                canvas.before:
+                    Color:
+                        rgba: 0.4, 0.5, 0.2, 1
+                    Rectangle:
+                        size: self.size
+                orientation: 'horizontal'
+                size_hint: 1, None
+                height: dp(20)
+                BoxLayout:
+                    Label:
+                        text: "S. No."
+                    Label:
+                        text: "A"
+                    Label:
+                        text: "B"
+                    Label:
+                        text: "C"
+                    Label:
+                        text: "Area"
+                    Label:
+                        text: "---"
 
-    ScrollView:
-        StackLayout:
-            size_hint: 1, None
-            id: area_list
-            height: self.minimum_height
+        ScrollView:
+            StackLayout:
+                size_hint: 1, None
+                id: area_list
+                height: self.minimum_height
 

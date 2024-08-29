@@ -1,30 +1,19 @@
-import re
-from kivy.config import Config
-# Config.set('graphics', 'width', '900')
-# Config.set('graphics', 'height', '400')
-
-from kivy.properties import NumericProperty, ObjectProperty
-from kivy.properties import BooleanProperty, StringProperty, Clock
-from kivy.uix.gridlayout import GridLayout
-from kivy.uix.anchorlayout import AnchorLayout
 from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.stacklayout import StackLayout
 from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.app import App
-from kivy.uix.widget import Widget
 from kivy.metrics import dp
-from kivy.graphics.context_instructions import Color
-from kivy.graphics.vertex_instructions import Line, Rectangle, Ellipse, Quad, Triangle
-from kivy import platform
-from kivy.core.window import Window
-from kivy.uix.relativelayout import RelativeLayout
-from kivy.lang.builder import Builder
-from kivy.core.audio import SoundLoader
 from kivy.uix.textinput import TextInput
-import math
 from kivy.uix.popup import Popup
+from kivy import platform
+import math
+import re
+import datetime
 
+if platform == "android":
+    from android.permissions import request_permissions, Permission, check_permission  # pylint: disable=import-error # type: ignore
+    request_permissions([Permission.READ_EXTERNAL_STORAGE,
+                        Permission.WRITE_EXTERNAL_STORAGE])
 class MainLayout(BoxLayout):
   areas = []
   aa = []
@@ -33,6 +22,11 @@ class MainLayout(BoxLayout):
   del_buttons = []
   current = 0
   updating = False
+
+  # def export(self, *args):
+  #   date_append = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M")
+  #   image_name = f"LAC_{date_append}"
+  #   self.ids.main_app.export_to_png(f"{image_name}.png")
 
   def add_area(self):
     values = []
@@ -130,7 +124,9 @@ class MainLayout(BoxLayout):
     aana = int((total - 5476*ropani)/342.25)
     paisa = int((total - 5476*ropani - aana*342.25)/85.5625)
     dam = (total - 5476*ropani - aana*342.25 - paisa*85.5625)/21.390625
-    self.ids.total_area.text = f"Total Area: {total:.2f} sq. ft. ({ropani}-{aana}-{paisa}-{dam:.2f})"
+    self.ids.total_area.text = f"{total:.2f} sq.ft."
+    self.ids.total_area_sqm.text = f"{total/(3.2808*3.2808):.2f} sq.m."
+    self.ids.total_area_RAPD.text = f"{ropani}-{aana}-{paisa}-{dam:.2f} (RAPD)"
 
     self.ids.area_list.clear_widgets()
     for i, area in enumerate(self.areas):
